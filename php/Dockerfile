@@ -1,5 +1,5 @@
 FROM php:8.0.3-fpm
-
+WORKDIR /var/www
 RUN docker-php-ext-install pdo pdo_mysql
 
 
@@ -47,4 +47,8 @@ RUN docker-php-ext-install \
 # Install Postgre PDO
 RUN apt-get install -y libpq-dev \
     && docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
-    && docker-php-ext-install pdo pdo_pgsql pgsql
+    && docker-php-ext-install pdo pdo_pgsql pgsql \
+
+ADD . /var/www
+RUN chown -R www-data:www-data /var/www
+RUN chmod -R 755 /var/www/storage

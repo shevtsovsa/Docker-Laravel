@@ -16,19 +16,9 @@ services:
       - db
 
   #Database Service
-  # db:
-  #   image : mysql
-  #   container_name : mysql
-  #   volumes:
-  #     - ./mysql/data:/var/lib/mysql
-  #   ports:
-  #     - "3306:3306"
-  #   environment:
-  #     MYSQL_DATABASE: blog
-  #     MYSQL_ROOT_PASSWORD: password
   db:
     image: postgres
-    container_name: postgres
+    container_name: postgres2
     volumes:
       - ./postgresql/data:/var/lib/postgresql/data
     ports:
@@ -47,17 +37,9 @@ services:
     volumes:
       - ./src:/var/www
     ports:
-      - "9000:9000"
+      - "8000:8000"
     working_dir: /var/www
-
-  #phpMyAdmin Service
-  # phpmyadmin:
-  #   image: phpmyadmin/phpmyadmin
-  #   container_name: phpmyadmin
-  #   ports:
-  #     - "3400:80"
-  #   depends_on:
-  #     - db
+    
   pgadmin:
     image: dpage/pgadmin4
     container_name: pgAdmin
